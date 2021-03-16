@@ -45,19 +45,10 @@ class BooksApp extends React.Component {
     }) 
   }
   searchBook=(query) => {
-    BooksAPI.search(query).then(books =>{
-      
-      let booksToArray = [];
-      const filteredBooks = booksToArray.concat(books).filter((book) => 
-      book.name.includes(query) || 
-      book.authors.some(author => author.includes(query))
-    );
-       
-      this.setState((prevState)=>({
-        searchedBooks: filteredBooks
-        
+    BooksAPI.search(query).then(books =>{  
+      this.setState(()=>({
+        searchedBooks: books
       }))
-    
 
     })
 
@@ -74,8 +65,8 @@ class BooksApp extends React.Component {
     return (
       <BrowserRouter>
         <div className="app">
-           {/* Search page was here */}
-            <div className="list-books">
+          
+              <div className="list-books">
               <div className="list-books-title">
                 <h1>MyReads</h1>
               </div>
@@ -109,14 +100,19 @@ class BooksApp extends React.Component {
                 
                 
               </div>
-            </div>
+            </div> 
+         
+              <Route path="/search" render={()=>( searchedBooks &&
+                <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
+            ) } />
+            <Route path="/" exact />
+             )
+          
+
          
           
         </div>
-       <Route path="/search" render={()=>( searchedBooks &&
-           <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
-       ) } />
-       <Route path="/" exact />
+       
       </BrowserRouter>
     )
   }

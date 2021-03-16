@@ -37,7 +37,7 @@ class SearchBook  extends React.Component{
             </div>
             <div className="search-books-results">
             <ol className="books-grid">
-               { books && books.map(book => book.imageLinks && (
+               { books.length >0 && books.map(book => book.imageLinks && (
                    <li key={book.id}>
                    <div className="book">
                    <div className="book-top">

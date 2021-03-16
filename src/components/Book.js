@@ -5,7 +5,7 @@ class  Book  extends React.Component {
     
 
      changeShelfHandler = (chosenShelf, bookID)=>{
-        //console.log(`${chosenShelf} and the book is ${bookID}`);
+        
         this.props.changeShelf(bookID, chosenShelf)
 
     }

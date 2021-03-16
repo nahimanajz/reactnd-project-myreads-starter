@@ -10,9 +10,9 @@ class SearchBook  extends React.Component{
     }
     
     render(){
-        const {books, getQuery} = this.props;
-        const { imageLinks } = this.props.books; 
-        const thumbnail = imageLinks? imageLinks.thumbnail : '';
+        const {books} = this.props;
+        
+       
 
     return(
         <div className="search-books">
@@ -21,14 +21,7 @@ class SearchBook  extends React.Component{
                  <button className="close-search">Close</button>
             </Link>
             <div className="search-books-input-wrapper">
-                {/*
-                NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                You can find these search terms here:
-                https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                you don't find a specific author or title. Every search is limited by search terms.
-                */}
+                
                 <input type="text" 
                      placeholder="Search by title or author" 
                      onChange={(e)=> this.getQuery(e.target.value)}  />
@@ -38,6 +31,7 @@ class SearchBook  extends React.Component{
             <div className="search-books-results">
             <ol className="books-grid">
                { books.length >0 && books.map(book => book.imageLinks && (
+                   
                    <li key={book.id}>
                    <div className="book">
                    <div className="book-top">

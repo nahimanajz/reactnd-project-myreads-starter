@@ -44,7 +44,7 @@ class BooksApp extends React.Component {
       }));
     }) 
   }
-  searchBook=(query) => {
+  searchBook=(query=' ') => {
     BooksAPI.search(query).then(books =>{  
       this.setState(()=>({
         searchedBooks: books
@@ -58,7 +58,7 @@ class BooksApp extends React.Component {
   render() {  
     
     const { books, searchedBooks} = this.state; 
-    console.log(JSON.stringify(searchedBooks.length));
+   
     const currentlyReading= books.filter(book => book.shelf === 'currentlyReading');
     const read = books.filter(book => book.shelf === 'read');
     const wantToRead = books.filter(book => book.shelf === 'wantToRead');

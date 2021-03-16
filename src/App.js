@@ -5,6 +5,7 @@ import './App.css'
 import { Book } from './components/Book';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import SearchBook from './components/SearchBook';
+import Shelf from './components/Shelf';
 
 
 
@@ -62,56 +63,33 @@ class BooksApp extends React.Component {
     const currentlyReading= books.filter(book => book.shelf === 'currentlyReading');
     const read = books.filter(book => book.shelf === 'read');
     const wantToRead = books.filter(book => book.shelf === 'wantToRead');
+
     return (
       <BrowserRouter>
-        <div className="app">
-          
+        <div className="app">       
               <div className="list-books">
-              <div className="list-books-title">
-                <h1>MyReads</h1>
-              </div>
-              <div className="list-books-content">
-                <div>
-                  <div className="bookshelf">
-                    <h2 className="bookshelf-title">Currently Reading</h2>
-                    
-                    <Book books={currentlyReading} changeShelf={this.changeShelf}/>
-                  </div>
-                  <div className="bookshelf">
-                    <h2 className="bookshelf-title">Want to Read</h2>
-                    <div className="bookshelf-books">
-                        <Book books={wantToRead} changeShelf={this.changeShelf}/>
-                      
-                    </div>
-                  </div>
-                  <div className="bookshelf">
-                    <h2 className="bookshelf-title">Read</h2>
-                    <div className="bookshelf-books">
-                      <Book books={read} changeShelf={this.changeShelf}/>
-                      
-                    </div>
-                  </div>
+                    <Route path="/search" render={()=>( searchedBooks &&
+                      <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
+                    ) } />
+                  <Route path="/" exact />
+                <div className="list-books-title">
+                  <h1>MyReads</h1>
                 </div>
-              </div>
-              <div className="open-search">
-                <Link to='search' books={books}> 
-                      <button>Add a book</button>
-                </Link>
-                
-                
-              </div>
-            </div> 
-         
-              <Route path="/search" render={()=>( searchedBooks &&
-                <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
-            ) } />
-            <Route path="/" exact />
-             )
-          
-
-         
-          
-        </div>
+                <div className="list-books-content">
+                    <div>
+                      <Shelf books={currentlyReading} changeShelf={this.changeShelf} shelf={'currentlyReading'} />
+                      <Shelf books={wantToRead} changeShelf={this.changeShelf} shelf={'Want to Read'} />                  
+                      <Shelf books={read} changeShelf={this.changeShelf} shelf={'Read'} />
+                    </div>
+                    <div className="open-search">
+                      <Link to='search' books={books}> 
+                            <button>Add a book</button>
+                      </Link>                
+                      
+                    </div>
+                </div>  
+         </div>
+         </div>
        
       </BrowserRouter>
     )

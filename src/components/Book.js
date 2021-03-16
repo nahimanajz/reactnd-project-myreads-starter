@@ -5,7 +5,7 @@ class  Book  extends React.Component {
     
 
      changeShelfHandler = (chosenShelf, bookID)=>{
-        //console.log(`${chosenShelf} and the book is ${bookID}`);
+        
         this.props.changeShelf(bookID, chosenShelf)
 
     }
@@ -13,7 +13,7 @@ render() {
     const { books } = this.props;
     return (
         <ol className="books-grid">
-            { books.map(book =>(
+            { books && books.map(book =>(
             <li key={book.id}>
                 <div className="book">
                 <div className="book-top">
@@ -23,6 +23,8 @@ render() {
                     <div className="book-shelf-changer">
                     <select onChange={(e)=>this.changeShelfHandler(e.target.value, book)}>
                         <option value="move" disabled>Move to...</option>
+                        <option value="" hidden></option>
+
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>

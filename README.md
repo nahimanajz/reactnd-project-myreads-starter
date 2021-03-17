@@ -1,12 +1,21 @@
 # MyReads Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
-
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+My reads is an web application that helps user to filter a collection book into the following shelf _Currently reading_, _Want to read_, and _Read_,not only **MyReads** allows a user to search books from google books API
+for books which are not listed in the shelf listed above
 
 ## How to install
-1. Clone this repository  (https://github.com/nahimanajz/reactnd-project-myreads-starter.git)
-2. in your terminal  run
-  -  npm install
-  - npm start
-Then homepage will be opened and you can filter a book and run sort the book in the shelf you want accordingly.
+1. Clone  [This](https://github.com/nahimanajz/reactnd-project-myreads-starter.git) Repository
+2. In your terminal  run
+ ``` 
+   npm install
+   npm start
+  ```
+ 
+ ## Pages
+  * Homepage
+  * Search Page
+  ## DevNotes
+  - On `Homepage` **books** must be sorted in the above mentioned **shelves**
+  - On `SearchPage` When a user enters a query and the query returns nothing it's because that `book.title` or `books.author` sent as query doesn`t exist in the **books** collection 
+  
+

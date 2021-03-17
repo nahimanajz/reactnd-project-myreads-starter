@@ -38,13 +38,36 @@ class SearchBook  extends React.Component{
                    <div className="book-cover"                           
                      style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                        <div className="book-shelf-changer">
+                           {/* TODO: check the book if is assigned on anyshelf below
+                             By using book filter is should be great
+                             set <option selected> on the books which are selected
+                           */}
                        <select onChange={(e)=>this.props.changeShelf(book,e.target.value)}>
-                           <option value="move" disabled>Move to...</option>
-                           <option value="" hidden></option>
-                           <option value="currentlyReading">Currently Reading</option>
-                           <option value="wantToRead">Want to Read</option>
-                           <option value="read">Read</option>
-                           <option value="none">None</option>
+                       {                        
+                          book.shelf === 'currentlyReading' ? ( 
+                          <option value="currentlyReading" selected>Currently Reading</option> 
+                          ):(<option value="currentlyReading">Currently Reading</option>)
+                          }
+                          { 
+                            book.shelf === 'wantToRead' ? ( 
+                            <option value="wantToRead" selected> Want to Read</option> ):(
+                            <option value="wantToRead"> Want to Read</option>
+                            )                         
+                          }
+                          { 
+                            book.shelf === 'read' ?( 
+                            <option value="read" selected>Read</option>
+                             ):(
+                                <option value="read">Read</option>
+                            )
+                          }
+                          { 
+                             book.shelf === 'none' ? (
+                                <option value="none" selected>None</option>
+                                ):(
+                                 <option value="none">None</option>
+                                )
+                          }
                        </select>
                        </div>
                    </div>

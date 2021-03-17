@@ -24,11 +24,32 @@ render() {
                     <select onChange={(e)=>this.changeShelfHandler(e.target.value, book)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="" hidden></option>
-
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
+                        {                        
+                          book.shelf === 'currentlyReading' ? ( 
+                          <option value="currentlyReading" selected>Currently Reading</option> 
+                          ):(<option value="currentlyReading">Currently Reading</option>)
+                          }
+                          { 
+                            book.shelf === 'wantToRead' ? ( 
+                            <option value="wantToRead" selected> Want to Read</option> ):(
+                            <option value="wantToRead"> Want to Read</option>
+                            )                         
+        
+                          }
+                          { 
+                            book.shelf === 'read' ?( 
+                            <option value="read" selected>Read</option>
+                             ):(
+                                <option value="read">Read</option>
+                            )
+                          }
+                          { 
+                             book.shelf === 'none' ? (
+                                <option value="none" selected>Currently Reading</option>
+                                ):(
+                                 <option value="none">Currently Reading</option>
+                                )
+                          }
                     </select>
                     </div>
                 </div>

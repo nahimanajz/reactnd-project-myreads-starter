@@ -71,24 +71,28 @@ class BooksApp extends React.Component {
                     <Route path="/search" render={()=>( searchedBooks &&
                       <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
                     ) } />
-                  <Route path="/" exact />
-                <div className="list-books-title">
-                  <h1>MyReads</h1>
-                </div>
-                <div className="list-books-content">
-                    <div>
-                      <Shelf books={currentlyReading} changeShelf={this.changeShelf} shelf={'currentlyReading'} />
-                      <Shelf books={wantToRead} changeShelf={this.changeShelf} shelf={'Want to Read'} />                  
-                      <Shelf books={read} changeShelf={this.changeShelf} shelf={'Read'} />
-                    </div>
-                    <div className="open-search">
-                      <Link to='search' books={books}> 
-                            <button>Add a book</button>
-                      </Link>                
-                      
-                    </div>
-                </div>  
-         </div>
+                  <Route path="/" exact render ={()=>(
+                      <>
+                            <div className="list-books-title">
+                              <h1>MyReads</h1>
+                            </div>
+                            <div className="list-books-content">
+                                <div>
+                                  <Shelf books={currentlyReading} changeShelf={this.changeShelf} shelf={'currentlyReading'} />
+                                  <Shelf books={wantToRead} changeShelf={this.changeShelf} shelf={'Want to Read'} />                  
+                                  <Shelf books={read} changeShelf={this.changeShelf} shelf={'Read'} />
+                                </div>
+                                <div className="open-search">
+                                  <Link to='search' books={books}> 
+                                        <button>Add a book</button>
+                                  </Link>                
+                                  
+                                </div>
+                            </div>  
+                      </>
+                  )}/>
+                
+              </div>
          </div>
        
       </BrowserRouter>

@@ -10,8 +10,6 @@ class SearchBook  extends React.Component{
     
     render(){
         const {books} = this.props;
-        
-       
 
     return(
         <div className="search-books">
@@ -38,11 +36,10 @@ class SearchBook  extends React.Component{
                    <div className="book-cover"                           
                      style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                        <div className="book-shelf-changer">
-                           {/* TODO: check the book if is assigned on anyshelf below
-                             By using book filter is should be great
-                             set <option selected> on the books which are selected
-                           */}
+                           
                        <select onChange={(e)=>this.props.changeShelf(book,e.target.value)}>
+                        <option value="move" disabled>Move to...</option>
+                        <option value="" hidden></option>
                        {                        
                           book.shelf === 'currentlyReading' ? ( 
                           <option value="currentlyReading" selected>Currently Reading</option> 

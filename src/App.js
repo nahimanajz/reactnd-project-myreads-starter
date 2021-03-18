@@ -2,7 +2,6 @@ import React from 'react'
  import * as BooksAPI from './BooksAPI'
 import './App.css'
 // import Shelf from './components/Shelf';
-import { Book } from './components/Book';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import SearchBook from './components/SearchBook';
 import Shelf from './components/Shelf';
@@ -35,41 +34,52 @@ class BooksApp extends React.Component {
      })   
  
   }
-  //https://www.tutorialspoint.com/reactjs/reactjs_component_life_cycle.htm
   
   changeShelf = (book, shelf)=> {    
-   
+    
+
     BooksAPI.update(book, shelf).then(updateBooks => {
       this.setState((prevState)=>({
         books: prevState.books.filter((updatedBook)=> updatedBook.id !== book.id).concat({...book, shelf}),
       }));
     }) 
   }
-  searchBook=(query=' ') => {
-    BooksAPI.search(query).then(books =>{  
-      this.setState(()=>({
-        searchedBooks: books
-      }))
+  searchBook=(query=' ') => {    
+    BooksAPI.search(query).then(books =>{    
+     let updateSearchedBooks = [];
+        const currentBooks = this.state.books.map(book=>book.id);       
+        updateSearchedBooks= books.length > 0 &&  books.filter(elem =>{
+            if(currentBooks.includes(elem.id) && !elem.shelf){
+                elem.shelf = "none"
+                return elem;
+            }else if(!currentBooks.includes(elem.id) && elem.shelf){
+              return elem;
+            }
+        }); 
+        this.setState(()=>({
+          searchedBooks: updateSearchedBooks
+        }))
+        
 
-    })
-
-    
+    });
    }
+   
+     
+     
+  
 
   render() {  
-    
     const { books, searchedBooks} = this.state; 
-   
     const currentlyReading= books.filter(book => book.shelf === 'currentlyReading');
     const read = books.filter(book => book.shelf === 'read');
     const wantToRead = books.filter(book => book.shelf === 'wantToRead');
-
+ 
     return (
       <BrowserRouter>
         <div className="app">       
               <div className="list-books">
                     <Route path="/search" render={()=>( searchedBooks &&
-                      <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} />
+                      <SearchBook books={searchedBooks} searchBook={this.searchBook} changeShelf={this.changeShelf} shelfedBooks= {books} />
                     ) } />
                   <Route path="/" exact render ={()=>(
                       <>

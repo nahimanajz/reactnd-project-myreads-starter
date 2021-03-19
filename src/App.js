@@ -45,20 +45,17 @@ class BooksApp extends React.Component {
     }) 
   }
   searchBook=(query=' ') => {    
-    BooksAPI.search(query).then(books =>{    
-     let updateSearchedBooks = [];
-        const currentBooks = this.state.books.map(book=>book.id);       
-        updateSearchedBooks= books.length > 0 &&  books.filter(elem =>{
-            if(currentBooks.includes(elem.id) && !elem.shelf){
-                elem.shelf = "none"
-                return elem;
-            }else if(!currentBooks.includes(elem.id) && elem.shelf){
-              return elem;
-            }
-        }); 
+    BooksAPI.search(query).then(searchedBooks =>{   
+      searchedBooks.length > 0 && searchedBooks.map(book => {
+        const booksOnShelf = this.state.books.find((b)=>b.id === book.id);
+           return booksOnShelf ? book.shelf = booksOnShelf.shelf: book.shelf = "none"
+     
+    })
+  
         this.setState(()=>({
-          searchedBooks: updateSearchedBooks
+          searchedBooks
         }))
+        
         
 
     });
@@ -88,7 +85,7 @@ class BooksApp extends React.Component {
                             </div>
                             <div className="list-books-content">
                                 <div>
-                                  <Shelf books={currentlyReading} changeShelf={this.changeShelf} shelf={'currentlyReading'} />
+                                  <Shelf books={currentlyReading} changeShelf={this.changeShelf} shelf={'Currently Reading'} />
                                   <Shelf books={wantToRead} changeShelf={this.changeShelf} shelf={'Want to Read'} />                  
                                   <Shelf books={read} changeShelf={this.changeShelf} shelf={'Read'} />
                                 </div>

@@ -37,34 +37,16 @@ class SearchBook  extends React.Component{
                      style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                        <div className="book-shelf-changer">
                            
-                       <select onChange={(e)=>this.props.changeShelf(book,e.target.value)}>
+                       <select onChange={(e)=>this.props.changeShelf(book,e.target.value)} value={book.shelf}>
                         <option value="move" disabled>Move to...</option>
-                        <option value="" hidden></option>
-                       {                        
-                          book.shelf === 'currentlyReading' ? ( 
-                          <option value="currentlyReading" selected>Currently Reading</option> 
-                          ):(<option value="currentlyReading">Currently Reading</option>)
-                          }
-                          { 
-                            book.shelf === 'wantToRead' ? ( 
-                            <option value="wantToRead" selected> Want to Read</option> ):(
-                            <option value="wantToRead"> Want to Read</option>
-                            )                         
-                          }
-                          { 
-                            book.shelf === 'read' ?( 
-                            <option value="read" selected>Read</option>
-                             ):(
-                                <option value="read">Read</option>
-                            )
-                          }
-                          { 
-                             book.shelf === 'none' ? (
-                                <option value="none" selected>None</option>
-                                ):(
-                                 <option value="none">None</option>
-                                )
-                          }
+                       
+                      
+                          <option value="currentlyReading">Currently Reading</option>
+                         
+                            <option value="wantToRead"> Want to Read</option>                         
+                            <option value="read">Read</option>                      
+                            <option value="none">None</option>
+                       
                        </select>
                        </div>
                    </div>
